@@ -22,7 +22,7 @@ STOP = 'stop'
 def main():
     global FPSCLOCK, DISPLAYSURF, FONT
     pygame.init()
-    FONT = pygame.font.Font('D:/18110168_GITHUBS/ZZZChayThu/CatchMeGame-master/verdanab.ttf', 15)
+    FONT = pygame.font.Font('verdanab.ttf', 15)
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pygame.display.set_caption("Catch Coins Game")
@@ -331,7 +331,7 @@ def gameplay_start():
 
     while True:
         DISPLAYSURF.fill(WHITE)
-        textSurf = FONT.render("Catch ME! the Heaven's Ruby", True, BLACK)
+        textSurf = FONT.render("Catch Coins Game", True, BLACK)
         textRect = textSurf.get_rect()
         textRect.topleft = (20, 10)
         DISPLAYSURF.blit(textSurf, textRect)
