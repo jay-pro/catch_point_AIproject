@@ -1,10 +1,12 @@
 # catch_point_AIproject
 
-<img src="https://github.com/jay-pro/catch_point_AIproject/blob/main/gifs/poster(2).png" width="400px" height="524px" align="left" alt="Computador">
-
-<p align="justify" margin="50%">
-<br>🤖🧑‍💻<br>
-Artificial Intelligence Subject's Final Project.<br>🐍 Python game with main package Pygame<br>Game have modes for human, AI, and boths<br>
+<table>
+    <tr>
+        <td align="center"><a href="https://github.com/jay-pro/catch_point_AIproject" target="_blank"><img src="https://github.com/jay-pro/catch_point_AIproject/blob/main/gifs/poster(2).png" width="300px" height="424px"></a></td>
+        <td align="center"><br>🤖🧑‍💻<br>
+Artificial Intelligence Subject's Final Project.<br>🐍 Python game with main package Pygame<br>Game have modes for human, AI, and boths<br></td>
+    </tr>
+</table>
 
 # 4 modes
 
