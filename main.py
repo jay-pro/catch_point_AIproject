@@ -17,15 +17,21 @@ DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
 STOP = 'stop'
+enemyImage = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/gold.png')
+PlayerAImage = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/PlayerA.jpg')
+PlayerBImage = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/PlayerB.jpg')
+Bot1Image = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/bot1.jpg')
+Bot2Image = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/bot2.jpg')
+Bot3Image = pygame.image.load('D:/18110168_GITHUBS/catch_point_AIproject/images/bot3.jpg')
 
 
 def main():
     global FPSCLOCK, DISPLAYSURF, FONT
     pygame.init()
-    FONT = pygame.font.Font('verdanab.ttf', 15)
+    FONT = pygame.font.Font('D:/18110168_GITHUBS/catch_point_AIproject/verdanab.ttf', 15)
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
-    pygame.display.set_caption("Catch Coins Game")
+    pygame.display.set_caption("Catch Coins Game - Group10 - AI Final Project")
     while True:
         gameplay_start()
 
@@ -211,8 +217,10 @@ def gameplay_HUMANsolo():
     move = STOP
     midx = WINDOWWIDTH / 2
     midy = WINDOWHEIGHT / 2
+    #hướng đi
     enemyCoord = getRandomLocation()  # [{'x':startx, 'y':starty}]
     playerACoord = [{'x': midx, 'y': midy}]
+    #
     if NUMBER == 1:
         direction = UP
     elif NUMBER == 2:
@@ -231,6 +239,7 @@ def gameplay_HUMANsolo():
         for event in pygame.event.get():
             if event.type == QUIT:
                 terminate()
+            #chọn btn để di duyển
             elif event.type == KEYDOWN:
                 if event.key in (K_w, K_UP):
                     move = UP
@@ -251,12 +260,13 @@ def gameplay_HUMANsolo():
                 elif pygame.Rect(WINDOWWIDTH - X_EXIT - 10, WINDOWHEIGHT - Y_EXIT - 10, X_EXIT, Y_EXIT).collidepoint(
                         mousex, mousey):
                     terminate()
-
+        #Tính điểm
         if -25 < playerACoord[A]['x'] - enemyCoord[START]['x'] < 25 and -25 < playerACoord[A]['y'] - enemyCoord[START][
             'y'] < 25:
             enemyCoord = getRandomLocation()
             PLYRscore += 1
 
+        #đường đi của player theo btn đã chọn ban nãy
         if move == UP:
             newMOVE = {'x': playerACoord[A]['x'], 'y': playerACoord[A]['y'] - n}
         elif move == DOWN:
@@ -268,10 +278,12 @@ def gameplay_HUMANsolo():
         elif move == STOP:
             newMOVE = {'x': playerACoord[A]['x'], 'y': playerACoord[A]['y']}
 
+        #nếu player chạm biên thì player dừng
         if playerACoord[A]['x'] < 25 or playerACoord[A]['x'] > WINDOWWIDTH - 25 or playerACoord[A]['y'] < 25 or \
                 playerACoord[A]['y'] > WINDOWHEIGHT - 25:
             move = STOP
 
+        #vị trí mới của player sau khi di chuyển
         if direction == UP:
             newPLACE = {'x': enemyCoord[START]['x'] - n, 'y': enemyCoord[START]['y'] - n}
         elif direction == DOWN:
@@ -734,7 +746,7 @@ def gameplay_AIvsAIvsAI():
 
     while True:
         DISPLAYSURF.fill(WHITE)
-        textSurf = FONT.render('MODE : AI vs AI vs AI (the Movie)', True, BLACK)
+        textSurf = FONT.render('MODE : AI vs AI vs AI', True, BLACK)
         textRect = textSurf.get_rect()
         textRect.topleft = (20, 10)
         DISPLAYSURF.blit(textSurf, textRect)
@@ -980,7 +992,7 @@ def gameplay_AIvsAIvsAI():
 
 def gameOptions():
     global X_OPT1, Y_OPT1, X_OPT2, Y_OPT2, X_OPT3, Y_OPT3, X_OPT4, Y_OPT4, X_OPT5, Y_OPT5
-    menuSurf1 = FONT.render('Select Battle!', True, BLACK)
+    menuSurf1 = FONT.render('Select Battle:', True, BLACK)
     menuRect1 = menuSurf1.get_rect()
     menuRect1.topleft = (WINDOWWIDTH * 5 / 8 - (menuSurf1.get_width() / 4), WINDOWHEIGHT * 5 / 8)
     DISPLAYSURF.blit(menuSurf1, menuRect1)
@@ -1059,78 +1071,82 @@ def drawexit():
     DISPLAYSURF.blit(menuSurf, menuRect)
 
 
+#dấu chấm đen
 def drawEnemy(EnemyCoord):
     for coord in EnemyCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        ENEMY = pygame.draw.circle(DISPLAYSURF, BLACK, (x, y), 20, 0)
+        #ENEMY = pygame.draw.circle(DISPLAYSURF, BLACK, (x, y), 20, 0)
+        ENEMY = DISPLAYSURF.blit(enemyImage,(x,y))
 
 
 def drawPlayerA(PlayerCoord):
     for coord in PlayerCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        PLAYER = pygame.draw.circle(DISPLAYSURF, RED, (x, y), 30, 5)
+        #PLAYER = pygame.draw.circle(DISPLAYSURF, RED, (x, y), 30, 5)
+        PLAYER = DISPLAYSURF.blit(PlayerAImage,(x,y))
 
 
 def drawPlayerB(PlayerCoord):
     for coord in PlayerCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        PLAYER = pygame.draw.circle(DISPLAYSURF, (0, 0, 255), (x, y), 30, 5)
+        #PLAYER = pygame.draw.circle(DISPLAYSURF, (0, 0, 255), (x, y), 30, 5)
+        PLAYER = DISPLAYSURF.blit(PlayerBImage,(x,y))
 
 
 def drawBOT(PlayerCoord):
     for coord in PlayerCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        PLAYER = pygame.draw.circle(DISPLAYSURF, (255, 0, 0), (x, y), 30, 5)
-
+        #PLAYER = pygame.draw.circle(DISPLAYSURF, (255, 0, 0), (x, y), 30, 5)
+        PLAYER = DISPLAYSURF.blit(Bot1Image,(x,y))
 
 def drawBOT2(PlayerCoord):
     for coord in PlayerCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        PLAYER = pygame.draw.circle(DISPLAYSURF, (0, 255, 0), (x, y), 30, 5)
-
+        #PLAYER = pygame.draw.circle(DISPLAYSURF, (0, 255, 0), (x, y), 30, 5)
+        PLAYER = DISPLAYSURF.blit(Bot2Image,(x,y))
 
 def drawBOT3(PlayerCoord):
     for coord in PlayerCoord:
         x = int(coord['x'])
         y = int(coord['y'])
-        PLAYER = pygame.draw.circle(DISPLAYSURF, BLUE, (x, y), 30, 5)
-
+        #PLAYER = pygame.draw.circle(DISPLAYSURF, BLUE, (x, y), 30, 5)
+        PLAYER = DISPLAYSURF.blit(Bot3Image,(x,y))
 
 def drawplayerAScore(score):
-    scoreSurf = FONT.render('RED Player = %s point' % (score), True, BLACK)
+    scoreSurf = FONT.render('Player A = %s point' % (score), True, BLACK)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - scoreSurf.get_width() - 20, 10)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 
 def drawplayerBScore(score):
-    scoreSurf = FONT.render('BLUE Player = %s point' % (score), True, BLACK)
+    scoreSurf = FONT.render('Player B = %s point' % (score), True, BLACK)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - scoreSurf.get_width() - 20, 20 + scoreSurf.get_height())
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 
 def drawbotScore(score):
-    scoreSurf = FONT.render('REDBot = %s point' % (score), True, BLACK)
+    scoreSurf = FONT.render('Bot 1 = %s point' % (score), True, BLACK)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - scoreSurf.get_width() - 20, 10)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 
 def drawbotScore2(score):
-    scoreSurf = FONT.render('GREENBot = %s point' % (score), True, BLACK)
+    scoreSurf = FONT.render('Bot 2 = %s point' % (score), True, BLACK)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - scoreSurf.get_width() - 20, 20 + scoreSurf.get_height())
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 
 def drawbotScore3(score):
-    scoreSurf = FONT.render('BLUEBot = %s point' % (score), True, BLACK)
+    scoreSurf = FONT.render('Bot 3 = %s point' % (score), True, BLACK)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - scoreSurf.get_width() - 20, 30 + 2 * (scoreSurf.get_height()))
     DISPLAYSURF.blit(scoreSurf, scoreRect)
