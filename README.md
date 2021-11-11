@@ -1,6 +1,6 @@
 # catch_point_AIproject
 
-<table>
+<table style="border-collapse: collapse;border-style:hidden;">
     <tr>
         <td align="center"><a href="https://github.com/jay-pro/catch_point_AIproject" target="_blank"><img src="https://github.com/jay-pro/catch_point_AIproject/blob/main/gifs/poster(2).png" width="300px" height="424px"></a></td>
         <td align="center"><br>🤖🧑‍💻<br>
