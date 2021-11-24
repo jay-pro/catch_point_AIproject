@@ -342,6 +342,7 @@ def gameplay_start():
         direction = RIGHT
 
     while True:
+        #game, version game.
         DISPLAYSURF.fill(WHITE)
         textSurf = FONT.render("Catch Coins Game", True, BLACK)
         textRect = textSurf.get_rect()
@@ -352,6 +353,7 @@ def gameplay_start():
         textRect.topleft = (20, 20 + textSurf.get_height())
         DISPLAYSURF.blit(textSurf, textRect)
 
+        #how to get score of AI bot and enemy has a new place
         if -25 < botCoord[START]['x'] - enemyCoord[START]['x'] < 25 and -25 < botCoord[START]['y'] - enemyCoord[START][
             'y'] < 25:
             BOTscore += 1
@@ -365,6 +367,7 @@ def gameplay_start():
             BOTscore3 += 1
             enemyCoord = getRandomLocation()
 
+        #direction of enemy -> enemy new place
         if direction == UP:
             newPLACE = {'x': enemyCoord[START]['x'] - n, 'y': enemyCoord[START]['y'] - n}
         elif direction == DOWN:
@@ -374,6 +377,17 @@ def gameplay_start():
         elif direction == RIGHT:
             newPLACE = {'x': enemyCoord[START]['x'] + n, 'y': enemyCoord[START]['y'] - n}
 
+        #train enemy direction after touch the edge of screen
+        #----------------------------------------------------------------
+        #                               |                               |
+        #              1                y                 2             |
+        #                               |                               |
+        #---------------------(-x)------O------(x)----------------------|
+        #                               |                               |
+        #              4               -y                 3             |
+        #                               |                               |
+        #----------------------------------------------------------------
+        #START = 0
         if ((enemyCoord[START]['x'] < 0) and (direction == UP)):
             direction = RIGHT
         elif ((enemyCoord[START]['x'] < 0) and (direction == LEFT)):
@@ -390,7 +404,18 @@ def gameplay_start():
             direction = RIGHT
         elif ((enemyCoord[START]['y'] > WINDOWHEIGHT) and (direction == LEFT)):
             direction = UP
-        # AI program red
+
+
+        # AI bot 1 Training
+        #----------------------------------------------------------------
+        #                               |                               |
+        #              A                y               * A             |
+        #              *                |                               |
+        #---------------------(-x)------O------(x)----------------------|
+        #                               |                 *             |
+        #              A *             -y                 A             |
+        #                               |                               |
+        #----------------------------------------------------------------
         if direction == UP and botCoord[START]['x'] > enemyCoord[START]['x'] and botCoord[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] - n, 'y': botCoord[START]['y']}
@@ -403,7 +428,15 @@ def gameplay_start():
         elif direction == UP and botCoord[START]['x'] < enemyCoord[START]['x'] and botCoord[START]['y'] < \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] + n, 'y': botCoord[START]['y']}
-
+        #----------------------------------------------------------------
+        #                               |                               |
+        #              A *              y               * A             |
+        #                               |                               |
+        #---------------------(-x)------O------(x)----------------------|
+        #                               |                 *             |
+        #              A *             -y                 A             |
+        #                               |                               |
+        #----------------------------------------------------------------
         elif direction == DOWN and botCoord[START]['x'] > enemyCoord[START]['x'] and botCoord[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] - n, 'y': botCoord[START]['y']}
@@ -416,7 +449,15 @@ def gameplay_start():
         elif direction == DOWN and botCoord[START]['x'] < enemyCoord[START]['x'] and botCoord[START]['y'] < \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] + n, 'y': botCoord[START]['y']}
-
+        #----------------------------------------------------------------
+        #                               |                               |
+        #              A *              y               * A             |
+        #                               |                               |
+        #---------------------(-x)------O------(x)----------------------|
+        #                               |                 *             |
+        #              A *             -y                 A             |
+        #                               |                               |
+        #----------------------------------------------------------------
         elif direction == LEFT and botCoord[START]['x'] > enemyCoord[START]['x'] and botCoord[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] - n, 'y': botCoord[START]['y']}
@@ -429,7 +470,15 @@ def gameplay_start():
         elif direction == LEFT and botCoord[START]['x'] < enemyCoord[START]['x'] and botCoord[START]['y'] < \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'] + n, 'y': botCoord[START]['y']}
-
+        #----------------------------------------------------------------
+        #                               |                               |
+        #              A                y                 A             |
+        #              *                |                 *             |
+        #---------------------(-x)------O------(x)----------------------|
+        #                               |                 *             |
+        #              A *             -y                 A             |
+        #                               |                               |
+        #----------------------------------------------------------------
         elif direction == RIGHT and botCoord[START]['x'] > enemyCoord[START]['x'] and botCoord[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove = {'x': botCoord[START]['x'], 'y': botCoord[START]['y'] - n}
@@ -445,7 +494,7 @@ def gameplay_start():
         else:
             BOTmove = {'x': botCoord[START]['x'], 'y': botCoord[START]['y']}
 
-        # 2nd AI green
+        # AI bot 2 training
         if direction == UP and botCoord2[START]['x'] > enemyCoord[START]['x'] and botCoord2[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove1 = {'x': botCoord2[START]['x'] - n, 'y': botCoord2[START]['y']}
@@ -500,7 +549,7 @@ def gameplay_start():
         else:
             BOTmove1 = {'x': botCoord2[START]['x'], 'y': botCoord2[START]['y']}
 
-        # 3rd AI blue
+        # # AI bot 3 training
         if direction == UP and botCoord3[START]['x'] > enemyCoord[START]['x'] and botCoord3[START]['y'] > \
                 enemyCoord[START]['y']:
             BOTmove2 = {'x': botCoord3[START]['x'] - n, 'y': botCoord3[START]['y']}
