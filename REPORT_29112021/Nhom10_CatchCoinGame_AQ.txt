@@ -1,0 +1,26 @@
+1. AI đầu vào ? để bắt coin
+vị trí của AI và vị trí đồng xu, và hướng đi ban đầu của con AI đó
+
+2. train là ntn?
+train là huấn luyện con AI để cho nó đạt được kết quả (tốt hoặc xấu)
+
+3. AI có thông minh theo tg ko? Nhóm làm là HARD CODING chứ not AI TRAINING
+AI này ko thông minh theo thời gian nha
+AI nhóm mình là AI thụ động
+Ban đầu nhóm phát triển nó từ Version như poster 1, chỉ có player control
+
+4. giả sử tăng độ khó của game thì điều chỉnh ntn được?
+được, tăng tốc độ, tần suất đồng xu
+chỉnh độ dội của con AI
+
+5. 
+nếu mình dùng nhiều hơn 1 đồng xu thì có được không?
+lỡ đang trên đường bắt 1 con gặp 1 con khác:
+nhóm đưa ra thì có 2 hướng giải quyết, do đều là so sánh khoảng cách tọa độ giữa 2 trọng tâm 2 object, nên là:
+- 1 là nếu con khác đó ở gần AI trong khoảng cách tọa độ như nhóm đặt ra 
+thì xem như AI đó đuổi bắt thành công
+thì con khác đó biến mất, AI đó thêm điểm
+- 2 là nếu khoảng cách lớn hơn thì khi đó nhóm đưa ra hướng phát triển là 
+khi đó nó sẽ tính so sánh khoảng cách giữa con AI với 2 đồng xu đó, 
+nếu cái nào gần hơn thì nó đuổi theo
+
